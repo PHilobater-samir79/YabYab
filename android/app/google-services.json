@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "650167341628",
+    "project_id": "yabyab-31cd7",
+    "storage_bucket": "yabyab-31cd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650167341628:android:b45db6aad6fff0152b2939",
+        "android_client_info": {
+          "package_name": "com.example.yabyab_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnyd2eJO45IvuEw8jW1T_1gobdhF9s-74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

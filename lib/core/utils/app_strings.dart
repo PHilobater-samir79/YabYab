@@ -1,0 +1,39 @@
+class AppStrings {
+  static const String skip = 'Skip';
+  static const String appNameShort = 'Yab';
+  static const String logIn = 'Log In';
+  static const String signUp = 'Sign up';
+  static const String welcomeBack = 'welcome Back !\n we really missed you';
+  static const String welcomeDearGuest =
+      "welcome Dear.Guest !\n Let's sign up now ";
+  static const String emailAddress = 'Email Address';
+  static const String password = 'Password';
+  static const String forgetPassword = 'Forget Password ?';
+  static const String confirmPassword = 'Confirm Password ';
+  static const String doNotHaveAcc = "Don't have an account ? ";
+  static const String haveAcc = "have an account ? ";
+  static const String logInNow = 'Log in now';
+  static const String signUpNow = 'Sign up now';
+  static const String name = 'Name';
+  static const String search = 'Search now....';
+  static const String posts = 'Posts';
+  static const String follower = 'Followers';
+  static const String following = 'Following';
+  static const String editProfile = 'Edit Profile';
+  static const String myChats = 'My chats';
+  static const String myGroups = 'My Groups';
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+  // static const String editProfile = 'Edit Profile' ;
+}

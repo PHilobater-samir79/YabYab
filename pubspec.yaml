@@ -1,0 +1,53 @@
+name: yabyab_app
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  animated_text_kit: null
+  cached: ^1.7.0
+  cached_network_image: ^3.3.1
+  cloud_firestore: null
+  cupertino_icons: null
+  firebase_auth: null
+  firebase_core: null
+  firebase_storage: null
+  flutter:
+    sdk: flutter
+  flutter_launcher_icons: null
+  get_it: null
+  iconsax: null
+  image_picker: null
+  intl: null
+  provider: null
+  shared_preferences: null
+  smooth_page_indicator: null
+  story_view: null
+  uuid: null
+  video_player: null
+
+dev_dependencies:
+  flutter_lints: null
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
+
+  fonts:
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora-Italic-VariableFont_wght.ttf
+        - asset: assets/fonts/Lora-VariableFont_wght.ttf
+          style: italic
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
