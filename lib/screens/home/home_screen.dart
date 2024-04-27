@@ -27,8 +27,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void downloadUserDate() {
     final provider = Provider.of<UserProvider>(context, listen: false);
-    if (provider.usersData?.stories?.isNotEmpty == true) {
-      provider.getUserData?.stories?.forEach((element) {
+    if (provider.usersData?.stories.isNotEmpty == true) {
+      provider.getUserData?.stories.forEach((element) {
         FirestoreMethods().deleteStoryAfter24h(story: element);
       });
     }
@@ -123,8 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return provider.usersData?.stories?.isEmpty ==
-                                      true
+                              return provider.usersData?.stories.isEmpty == true
                                   ? const StoryScreen()
                                   : StoryViewScreen(
                                       stories: provider.getUserData!.stories,
@@ -141,11 +140,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                      color: provider.usersData?.stories
-                                                  ?.isEmpty ==
-                                              true
-                                          ? Colors.black
-                                          : AppColors.darkGreenColor,
+                                      color:
+                                          provider.usersData?.stories.isEmpty ==
+                                                  true
+                                              ? Colors.black
+                                              : AppColors.darkGreenColor,
                                       width: 3),
                                   image: DecorationImage(
                                       fit: BoxFit.cover,

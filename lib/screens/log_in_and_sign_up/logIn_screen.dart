@@ -35,7 +35,6 @@ class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
       backgroundColor: AppColors.whiteColor,
@@ -254,6 +253,7 @@ class _LogInScreenState extends State<LogInScreen> {
           },
         );
       } on FirebaseAuthException catch (e) {
+        print(e.toString());
         Navigator.pop(context);
         showDialog(
           context: context,

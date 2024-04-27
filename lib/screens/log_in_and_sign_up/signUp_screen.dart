@@ -295,15 +295,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           );
         },
       );
-
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passController.text);
-
-        final imageId = Uuid().v4();
+        final imageId = const Uuid().v4();
         final saveImage = FirebaseStorage.instance
             .ref()
             .child('usersProfileImages')
+            // ignore: prefer_interpolation_to_compose_strings
             .child(imageId + 'jpg');
         await saveImage.putFile(pickedImage!);
         final imageUrl = await saveImage.getDownloadURL();
@@ -340,14 +339,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .set(chatUserModel.toJson());
 
+        // ignore: use_build_context_synchronously
         Navigator.pop(context);
+        // ignore: use_build_context_synchronously
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)),
-              title: Text(
+              title: const Text(
                 'sign up successfully',
                 style: AppTextStyle.styleRegularBlack16,
                 textAlign: TextAlign.center,
@@ -366,7 +367,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
           },
         );
-      } on FirebaseAuthException catch (e) {
+      } on FirebaseAuthException {
         Navigator.pop(context);
         showDialog(
           context: context,

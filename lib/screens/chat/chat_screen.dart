@@ -35,118 +35,6 @@ class _ChatScreenState extends State<ChatScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.darkGreenColor,
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            builder: (context) {
-              return Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * .3,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20.0,
-                      right: 20,
-                      top: 20,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Enter friend Email',
-                              style: AppTextStyle.styleRegularBlack20,
-                            ),
-                            CircleAvatar(
-                                radius: 20,
-                                backgroundColor: AppColors.darkGreenColor,
-                                child: Icon(
-                                  Icons.qr_code_scanner_outlined,
-                                  color: AppColors.blackColor,
-                                )),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: emailController,
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return 'Please Enter Membare Email ';
-                            }
-                            var emailValid = RegExp(
-                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(value);
-                            if (!emailValid) {
-                              return 'Please enter member real email address';
-                            }
-                            return null;
-                          },
-                          cursorColor: AppColors.blackColor,
-                          decoration: InputDecoration(
-                            suffixIcon: const Icon(
-                              Iconsax.personalcard,
-                              color: AppColors.greyColor,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                    color: AppColors.blackColor)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                    color: AppColors.blackColor)),
-                            labelText: AppStrings.emailAddress,
-                            labelStyle: const TextStyle(
-                                color: AppColors.darkGreenColor, fontSize: 17),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomButton(
-                          text: 'Create Room',
-                          color: AppColors.darkGreenColor,
-                          onTap: () {
-                            if (emailController.text.isNotEmpty) {
-                              FirebaseDatabase()
-                                  .creatRoom(emailController.text)
-                                  .then((value) {
-                                setState(() {
-                                  emailController.clear();
-                                  Navigator.pop(context);
-                                });
-                              });
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          );
-        },
-        child: const Icon(
-          Iconsax.message_add,
-          color: AppColors.blackColor,
-        ),
-      ),
       appBar: AppBar(
         backgroundColor: AppColors.whiteColor,
         automaticallyImplyLeading: false,
@@ -207,7 +95,140 @@ class _ChatScreenState extends State<ChatScreen>
                             child: CustomButton(
                               color: AppColors.darkGreenColor,
                               text: "Chat",
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pop(context);
+                                showModalBottomSheet(
+                                  context: context,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      child: SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .3,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 20.0,
+                                            right: 20,
+                                            top: 20,
+                                          ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Enter friend Email',
+                                                    style: AppTextStyle
+                                                        .styleRegularBlack20,
+                                                  ),
+                                                  CircleAvatar(
+                                                      radius: 20,
+                                                      backgroundColor: AppColors
+                                                          .darkGreenColor,
+                                                      child: Icon(
+                                                        Icons
+                                                            .qr_code_scanner_outlined,
+                                                        color: AppColors
+                                                            .blackColor,
+                                                      )),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              TextFormField(
+                                                controller: emailController,
+                                                validator: (value) {
+                                                  if (value == null ||
+                                                      value.trim().isEmpty) {
+                                                    return 'Please Enter Membare Email ';
+                                                  }
+                                                  var emailValid = RegExp(
+                                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                                      .hasMatch(value);
+                                                  if (!emailValid) {
+                                                    return 'Please enter member real email address';
+                                                  }
+                                                  return null;
+                                                },
+                                                cursorColor:
+                                                    AppColors.blackColor,
+                                                decoration: InputDecoration(
+                                                  suffixIcon: const Icon(
+                                                    Iconsax.personalcard,
+                                                    color: AppColors.greyColor,
+                                                  ),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: AppColors
+                                                                  .blackColor)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: AppColors
+                                                                  .blackColor)),
+                                                  labelText:
+                                                      AppStrings.emailAddress,
+                                                  labelStyle: const TextStyle(
+                                                      color: AppColors
+                                                          .darkGreenColor,
+                                                      fontSize: 17),
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              CustomButton(
+                                                text: 'Create Room',
+                                                color: AppColors.darkGreenColor,
+                                                onTap: () {
+                                                  if (emailController
+                                                      .text.isNotEmpty) {
+                                                    FirebaseDatabase()
+                                                        .creatRoom(
+                                                            emailController
+                                                                .text)
+                                                        .then((value) {
+                                                      setState(() {
+                                                        emailController.clear();
+                                                        Navigator.pop(context);
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ),
                           SizedBox(

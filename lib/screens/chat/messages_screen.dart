@@ -1,13 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:uuid/uuid.dart';
 import 'package:yabyab_app/core/models/chat_user_model.dart';
 import 'package:yabyab_app/core/models/message_model.dart';
 import 'package:yabyab_app/core/remote_data/firebase_database.dart';
@@ -162,7 +159,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     List<MessageModel> messageItems = snapshot.data!.docs
                         .map((e) => MessageModel.fromJson(e.data()))
                         .toList()
-                      ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+                      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
                     return messageItems.isNotEmpty
                         ? Expanded(
@@ -174,26 +171,23 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                     setState(() {
                                       selectedMessages.isNotEmpty
                                           ? selectedMessages.contains(
-                                                  messageItems[index]
-                                                      .messageId!)
+                                                  messageItems[index].messageId)
                                               ? selectedMessages.remove(
-                                                  messageItems[index]
-                                                      .messageId!)
+                                                  messageItems[index].messageId)
                                               : selectedMessages.add(
-                                                  messageItems[index]
-                                                      .messageId!)
+                                                  messageItems[index].messageId)
                                           : null;
                                       copiedMessages.isNotEmpty
                                           ? messageItems[index].type == 'text'
                                               ? copiedMessages.contains(
                                                       messageItems[index]
-                                                          .messageId!)
+                                                          .messageId)
                                                   ? copiedMessages.remove(
                                                       messageItems[index]
-                                                          .messageId!)
+                                                          .messageId)
                                                   : copiedMessages.add(
                                                       messageItems[index]
-                                                          .messageId!)
+                                                          .messageId)
                                               : null
                                           : null;
                                     });
@@ -201,27 +195,24 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                   onLongPress: () {
                                     setState(() {
                                       selectedMessages.contains(
-                                              messageItems[index].messageId!)
+                                              messageItems[index].messageId)
                                           ? selectedMessages.remove(
-                                              messageItems[index].messageId!)
+                                              messageItems[index].messageId)
                                           : selectedMessages.add(
-                                              messageItems[index].messageId!);
+                                              messageItems[index].messageId);
                                       messageItems[index].type == 'text'
                                           ? copiedMessages.contains(
-                                                  messageItems[index]
-                                                      .messageId!)
+                                                  messageItems[index].messageId)
                                               ? copiedMessages.remove(
-                                                  messageItems[index]
-                                                      .messageId!)
+                                                  messageItems[index].messageId)
                                               : copiedMessages.add(
-                                                  messageItems[index]
-                                                      .messageId!)
+                                                  messageItems[index].messageId)
                                           : null;
                                     });
                                   },
                                   child: ChatMessageCard(
                                     isSelected: selectedMessages.contains(
-                                        messageItems[index].messageId!),
+                                        messageItems[index].messageId),
                                     roomId: widget.roomId,
                                     index: index,
                                     messageModel: messageItems[index],

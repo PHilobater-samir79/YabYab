@@ -7,7 +7,7 @@ import 'package:yabyab_app/core/utils/theme/app_colors.dart';
 import 'package:yabyab_app/screens/profile/profile_screen.dart';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({super.key});
+  const SearchScreen({super.key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -26,9 +26,10 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Column(
             children: [
               TextField(
-                onChanged: (value){
+                onChanged: (value) {
                   setState(() {
-
+                    // ignore: unrelated_type_equality_checks
+                    searchController == value;
                   });
                 },
                 controller: searchController,
@@ -63,55 +64,85 @@ class _SearchScreenState extends State<SearchScreen> {
                     .get(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Expanded(
-                      child: const Center(
+                    return const Expanded(
+                      child: Center(
                           child: CircularProgressIndicator(
                         color: AppColors.darkGreenColor,
                       )),
                     );
                   }
                   if (snapshot.hasError) {
-                    return const Text(
-                      'We have error please try again later',
-                      style: AppTextStyle.styleRegularGreen16,
+                    return Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/search.png',
+                            height: MediaQuery.of(context).size.height * .2,
+                            width: MediaQuery.of(context).size.width * .5,
+                          ),
+                          const Text(
+                            'Please search for someone',
+                            style: AppTextStyle.styleRegularGreen16,
+                          ),
+                        ],
+                      ),
                     );
                   }
-                  return Expanded(
-                    child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return ProfileScreen(
-                                    userId: snapshot.data!.docs[index]['uid'],
-                                  );
-                                },
-                              ));
-                            },
-                            title: Text(
-                              snapshot.data!.docs[index]['userName'],
-                              style: AppTextStyle.styleRegularBlack16,
+                  // ignore: unrelated_type_equality_checks
+                  return searchController == ''
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/search.png',
+                              height: MediaQuery.of(context).size.height * .2,
+                              width: MediaQuery.of(context).size.width * .5,
                             ),
-                            leading: CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(snapshot
-                                  .data!.docs[index]['userProfileImage']),
+                            const Text(
+                              'Please search for someone',
+                              style: AppTextStyle.styleRegularGreen16,
                             ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Padding(
-                            padding: EdgeInsets.only(top: 10.0, bottom: 10),
-                            child: Divider(
-                              height: 1,
-                              color: AppColors.greyColor,
-                              thickness: .5,
-                            ),
-                          );
-                        },
-                        itemCount: snapshot.data!.docs.length),
-                  );
+                          ],
+                        )
+                      : Expanded(
+                          child: ListView.separated(
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return ProfileScreen(
+                                          userId: snapshot.data!.docs[index]
+                                              ['uid'],
+                                        );
+                                      },
+                                    ));
+                                  },
+                                  title: Text(
+                                    snapshot.data!.docs[index]['userName'],
+                                    style: AppTextStyle.styleRegularBlack16,
+                                  ),
+                                  leading: CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage: NetworkImage(snapshot
+                                        .data!.docs[index]['userProfileImage']),
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 10.0, bottom: 10),
+                                  child: Divider(
+                                    height: 1,
+                                    color: AppColors.greyColor,
+                                    thickness: .5,
+                                  ),
+                                );
+                              },
+                              itemCount: snapshot.data!.docs.length),
+                        );
                 },
               ),
             ],

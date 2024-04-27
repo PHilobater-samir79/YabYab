@@ -112,17 +112,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             width: width * .8,
                             child: ElevatedButton(
                               onPressed: () async {
-                                var dataSaved = await getIt<CacheHelper>()
+                                await getIt<CacheHelper>()
                                     .setData(key: 'isVisited', value: true)
                                     .then((value) {
                                   index == 2
                                       ? Navigator.pushReplacementNamed(
-                                      context, GeneralEnterApp.routeName)
+                                          context, GeneralEnterApp.routeName)
                                       : controller.nextPage(
-                                      duration:
-                                      const Duration(milliseconds: 1000),
-                                      curve: Curves
-                                          .fastEaseInToSlowEaseOut);
+                                          duration: const Duration(
+                                              milliseconds: 1000),
+                                          curve:
+                                              Curves.fastEaseInToSlowEaseOut);
                                 });
                               },
                               style: ElevatedButton.styleFrom(
