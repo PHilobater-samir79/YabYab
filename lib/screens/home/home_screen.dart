@@ -180,77 +180,77 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       width: 10,
                     ),
-                    StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('users')
-                          .where('stories', isNotEqualTo: [])
-                          .where('followers',
-                              arrayContains:
-                                  FirebaseAuth.instance.currentUser!.uid)
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Expanded(
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.darkGreenColor,
-                              ),
-                            ),
-                          );
-                        }
-                        return Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (context, index) {
-                              Map<String, dynamic> storyMap =
-                                  snapshot.data!.docs[index].data();
-                              FirestoreMethods().deleteStoryAfter24h(
-                                  story: storyMap['stories'][index]);
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) {
-                                          return StoryViewScreen(
-                                            stories: storyMap['stories'],
-                                          );
-                                        },
-                                      ));
-                                    },
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 10.0),
-                                      child: Container(
-                                        width: 80,
-                                        height: height * .1,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: AppColors.darkGreenColor,
-                                                width: 3),
-                                            image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: NetworkImage(
-                                                  "${storyMap['userImage']}",
-                                                ))),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    '${storyMap['userName']}',
-                                    style: AppTextStyle.styleRegularBlack16
-                                        .copyWith(fontSize: 12),
-                                  )
-                                ],
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
+                    // StreamBuilder(
+                    //   stream: FirebaseFirestore.instance
+                    //       .collection('users')
+                    //       .where('stories', isNotEqualTo: [])
+                    //       .where('followers',
+                    //           arrayContains:
+                    //               FirebaseAuth.instance.currentUser!.uid)
+                    //       .snapshots(),
+                    //   builder: (context, snapshot) {
+                    //     if (snapshot.connectionState ==
+                    //         ConnectionState.waiting) {
+                    //       return const Expanded(
+                    //         child: Center(
+                    //           child: CircularProgressIndicator(
+                    //             color: AppColors.darkGreenColor,
+                    //           ),
+                    //         ),
+                    //       );
+                    //     }
+                    //     return Expanded(
+                    //       child: ListView.builder(
+                    //         scrollDirection: Axis.horizontal,
+                    //         itemCount: snapshot.data!.docs.length,
+                    //         itemBuilder: (context, index) {
+                    //           Map<String, dynamic> storyMap =
+                    //               snapshot.data!.docs[index].data();
+                    //           FirestoreMethods().deleteStoryAfter24h(
+                    //               story: storyMap['stories'][index]);
+                    //           return Column(
+                    //             children: [
+                    //               GestureDetector(
+                    //                 onTap: () {
+                    //                   Navigator.push(context, MaterialPageRoute(
+                    //                     builder: (context) {
+                    //                       return StoryViewScreen(
+                    //                         stories: storyMap['stories'],
+                    //                       );
+                    //                     },
+                    //                   ));
+                    //                 },
+                    //                 child: Padding(
+                    //                   padding:
+                    //                       const EdgeInsets.only(right: 10.0),
+                    //                   child: Container(
+                    //                     width: 80,
+                    //                     height: height * .1,
+                    //                     decoration: BoxDecoration(
+                    //                         shape: BoxShape.circle,
+                    //                         border: Border.all(
+                    //                             color: AppColors.darkGreenColor,
+                    //                             width: 3),
+                    //                         image: DecorationImage(
+                    //                             fit: BoxFit.cover,
+                    //                             image: NetworkImage(
+                    //                               "${storyMap['userImage']}",
+                    //                             ))),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //               Text(
+                    //                 '${storyMap['userName']}',
+                    //                 style: AppTextStyle.styleRegularBlack16
+                    //                     .copyWith(fontSize: 12),
+                    //               )
+                    //             ],
+                    //           );
+                    //         },
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
               ),

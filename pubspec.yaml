@@ -4,12 +4,12 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.4.1 <4.0.0'
 
 dependencies:
   animated_text_kit: null
-  cached: ^1.7.0
-  cached_network_image: ^3.3.1
+  cached:
+  cached_network_image:
   cloud_firestore: null
   cupertino_icons: null
   firebase_auth: null
